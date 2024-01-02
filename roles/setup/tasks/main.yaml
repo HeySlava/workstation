@@ -15,6 +15,10 @@
   ansible.builtin.include_tasks:
     file: ./nvim.yaml
 
+- name: Clone dotfiles
+  ansible.builtin.include_tasks:
+    file: ./clone_dotfile.yaml
+
 - name: Create symlinks with stow
   ansible.builtin.include_tasks:
     file: ./stow.yaml

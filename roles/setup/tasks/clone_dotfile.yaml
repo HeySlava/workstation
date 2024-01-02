@@ -1,0 +1,11 @@
+---
+- name: Get home directory
+  ansible.builtin.set_fact:
+    home_directory: "{{ lookup('env', 'HOME') }}"
+
+- name: Clone dotfiles
+  ansible.builtin.git:
+    repo: https://github.com/HeySlava/.dotfiles
+    dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
+    single_branch: true
+    version: main
