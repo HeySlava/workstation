@@ -8,12 +8,12 @@
 - name: Extract neovim
   ansible.builtin.unarchive:
     src: /tmp/nvim-linux64.tar.gz
-    dest: /opt/nvim-linux64
+    dest: /opt/
   become: true
 
 - name: Create symbolic link for nvim
   ansible.builtin.file:
-    src: /opt/nvim-linux64/bin
+    src: /opt/nvim-linux64/bin/nvim
     dest: /usr/local/bin/nvim
     state: link
   become: true
