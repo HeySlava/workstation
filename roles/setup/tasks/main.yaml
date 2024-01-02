@@ -1,12 +1,20 @@
 ---
-- name: Update cache
-  ansible.builtin.apt:
-    update_cache: true
-    cache_valid_time: 3600
+- name: Install i3
+  ansible.builtin.include_tasks:
+    file: ./i3.yaml
 
-- name: Install packages
-  ansible.builtin.apt:
-    name:
-      - curl
-      - htop
-    state: present
+- name: Install common packages
+  ansible.builtin.include_tasks:
+    file: ./default_app.yaml
+
+- name: Install packages from snap
+  ansible.builtin.include_tasks:
+    file: ./snap-packages.yaml
+
+- name: Install latest neovim
+  ansible.builtin.include_tasks:
+    file: ./nvim.yaml
+
+- name: Create symlinks with stow
+  ansible.builtin.include_tasks:
+    file: ./stow.yaml

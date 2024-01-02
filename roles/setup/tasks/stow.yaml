@@ -1,0 +1,38 @@
+---
+- name: Get home directory
+  ansible.builtin.set_fact:
+    home_directory: "{{ lookup('env', 'HOME') }}"
+
+- name: Check if .bashrc exists
+  ansible.builtin.stat:
+    path: "{{ home_directory }}/.bashrc"
+  register: bashrc_stat
+
+- name: Backup old .bashrc
+  ansible.builtin.copy:
+    src: "{{ home_directory }}/.bashrc"
+    dest: "{{ home_directory }}/.bashrc.bak"
+    mode: preserve
+  when: bashrc_stat.stat.exists
+  changed_when: false
+
+- name: Remove .bashrc
+  ansible.builtin.file:
+    path: "{{ home_directory }}/.bashrc"
+    state: absent
+  changed_when: false
+
+- name: Run stow command
+  ansible.builtin.command: stow {{ item }}
+  register: output
+  changed_when: output.rc != 0
+  args:
+    chdir: "{{ home_directory }}/.dotfiles/"
+  loop:
+    - bash
+    - git
+    - kitty
+    - rofi
+    - tmux
+    - blocksi3
+    - nvim

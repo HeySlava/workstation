@@ -1,0 +1,6 @@
+---
+- name: Install telegram-desktop, firefox
+  community.general.snap:
+    name:
+      - telegram-desktop
+      - firefox
