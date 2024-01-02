@@ -1,8 +1,4 @@
 ---
-- name: Install i3
-  ansible.builtin.include_tasks:
-    file: ./i3.yaml
-
 - name: Install common packages
   ansible.builtin.include_tasks:
     file: ./default_app.yaml
@@ -14,6 +10,10 @@
 - name: Install latest neovim
   ansible.builtin.include_tasks:
     file: ./nvim.yaml
+
+- name: Install i3
+  ansible.builtin.include_tasks:
+    file: ./i3.yaml
 
 - name: Clone dotfiles
   ansible.builtin.include_tasks:
