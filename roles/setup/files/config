@@ -1,0 +1,12 @@
+Host kapitonov
+	User <name>
+	Hostname kapitonov.tech
+	PreferredAuthentications publickey
+	IdentityFile /home/slava/.ssh/kapitonov
+
+
+Host github.com
+	User git
+	Hostname github.com
+	PreferredAuthentications publickey
+	IdentityFile /home/slava/.ssh/git

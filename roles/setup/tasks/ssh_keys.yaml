@@ -1,0 +1,47 @@
+---
+- name: Get home directory
+  ansible.builtin.set_fact:
+    home_directory: "{{ lookup('env', 'HOME') }}"
+
+- name: Generate ssh keys
+  block:
+    - name: Check kapitonov
+      ansible.builtin.stat:
+        path: "{{ home_directory }}/.ssh/kapitonov"
+      register: kapitonov
+
+    - name: Check github
+      ansible.builtin.stat:
+        path: "{{ home_directory }}/.ssh/git"
+      register: git
+
+    - name: Check ssh-config
+      ansible.builtin.stat:
+        path: "{{ home_directory }}/.ssh/config"
+      register: config
+
+    - name: Create .ssh directory
+      ansible.builtin.file:
+        path: "{{ home_directory }}/.ssh"
+        state: directory
+        mode: "0700"
+      when: not (kapitonov.stat.exists and git.stat.exists and config.stat.exists)
+
+    - name: Generate SSH keys for kapitonov
+      ansible.builtin.command: ssh-keygen -q -t rsa -f {{ home_directory }}/.ssh/kapitonov -C '' -N ''
+      args:
+        creates: "{{ home_directory }}/.ssh/kapitonov"
+      when: not kapitonov.stat.exists
+
+    - name: Generate SSH keys for git
+      ansible.builtin.command: ssh-keygen -q -t rsa -f {{ home_directory }}/.ssh/git -C '' -N ''
+      args:
+        creates: "{{ home_directory }}/.ssh/git"
+      when: not git.stat.exists
+
+    - name: Copy ssh-config
+      ansible.builtin.copy:
+        src: config
+        dest: "{{ home_directory }}/.ssh/config"
+        mode: "0600"
+      when: not config.stat.exists

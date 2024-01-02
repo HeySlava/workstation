@@ -22,3 +22,7 @@
 - name: Create symlinks with stow
   ansible.builtin.include_tasks:
     file: ./stow.yaml
+
+- name: Generate ssh-keys
+  ansible.builtin.include_tasks:
+    file: ./ssh_keys.yaml
