@@ -14,5 +14,4 @@
       - tmux
       - xclip
     update-cache: true
-    cache_valid_time: 86400
   become: true
