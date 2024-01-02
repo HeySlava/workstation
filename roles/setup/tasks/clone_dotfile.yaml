@@ -5,7 +5,7 @@
 
 - name: Clone dotfiles
   ansible.builtin.git:
-    repo: https://github.com/HeySlava/.dotfiles
+    repo: git@github.com:HeySlava/.dotfiles.git
     dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
     single_branch: true
     version: main
