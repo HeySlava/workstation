@@ -1,7 +1,6 @@
 ---
-- name: Install telegram-desktop, firefox
+- name: Install packages from using snap
   community.general.snap:
     name:
       - telegram-desktop
-      - firefox
   become: true
