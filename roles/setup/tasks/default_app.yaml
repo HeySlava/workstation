@@ -5,9 +5,12 @@
       - curl
       - firefox
       - flameshot
+      - gcc
       - htop
       - i3blocks
       - kitty
+      - make
+      - perl
       - python3-pip
       - rofi
       - stow
