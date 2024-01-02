@@ -16,6 +16,7 @@
     repo: deb http://debian.sur5r.net/i3/ {{ ansible_distribution_release }} universe
     state: present
     filename: sur5r
+  become: true
 
 - name: Install i3 window manager
   ansible.builtin.apt:
