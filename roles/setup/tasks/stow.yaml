@@ -30,9 +30,10 @@
     chdir: "{{ home_directory }}/.dotfiles/"
   loop:
     - bash
+    - blocksi3
     - git
+    - i3
     - kitty
+    - nvim
     - rofi
     - tmux
-    - blocksi3
-    - nvim
