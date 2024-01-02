@@ -4,3 +4,4 @@
     name:
       - telegram-desktop
       - firefox
+  become: true
