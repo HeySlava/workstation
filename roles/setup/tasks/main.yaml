@@ -3,10 +3,6 @@
   ansible.builtin.include_tasks:
     file: ./default_app.yaml
 
-- name: Install packages from snap
-  ansible.builtin.include_tasks:
-    file: ./snap-packages.yaml
-
 - name: Install latest neovim
   ansible.builtin.include_tasks:
     file: ./nvim.yaml
@@ -26,3 +22,7 @@
 - name: Generate ssh-keys
   ansible.builtin.include_tasks:
     file: ./ssh_keys.yaml
+
+- name: Install packages from snap
+  ansible.builtin.include_tasks:
+    file: ./snap-packages.yaml
