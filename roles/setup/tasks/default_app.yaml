@@ -2,14 +2,16 @@
 - name: Install common apps
   ansible.builtin.apt:
     name:
+      - curl
+      - firefox
       - flameshot
       - htop
       - i3blocks
+      - kitty
       - python3-pip
+      - rofi
       - stow
       - tmux
-      - firefox
       - xclip
-      - curl
     update-cache: true
     cache_valid_time: 86400
