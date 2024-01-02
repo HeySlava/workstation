@@ -14,4 +14,16 @@
       - tmux
       - xclip
     update-cache: true
+    cache_valid_time: 6400
+  become: true
+
+- name: Remove dependencies that are no longer required and purge their configuration files
+  ansible.builtin.apt:
+    autoremove: true
+    purge: true
+  become: true
+
+- name: Run the equivalent of "apt-get clean" as a separate step
+  ansible.builtin.apt:
+    clean: true
   become: true
