@@ -10,6 +10,7 @@
       - i3blocks
       - kitty
       - make
+      - npm
       - perl
       - python3-pip
       - rofi
