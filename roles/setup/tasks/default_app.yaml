@@ -3,6 +3,7 @@
   ansible.builtin.apt:
     name:
       - curl
+      - fd-find
       - firefox
       - flameshot
       - gcc
@@ -13,6 +14,7 @@
       - npm
       - perl
       - python3-pip
+      - ripgrep
       - rofi
       - stow
       - tmux
