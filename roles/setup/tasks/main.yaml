@@ -19,6 +19,10 @@
   ansible.builtin.include_tasks:
     file: ./pip-packages.yaml
 
+- name: Init pre-commit hooks
+  ansible.builtin.include_tasks:
+    file: ./pre-commit-init.yaml
+
 - name: Clone dotfiles
   ansible.builtin.include_tasks:
     file: ./clone_dotfile.yaml

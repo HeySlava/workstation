@@ -1,0 +1,5 @@
+---
+- name: Pre-commit init
+  ansible.builtin.command: pre-commit init-templatedir {{ home_directory }}/.git-template
+  args:
+    creates: "{{ home_directory }}/.init-templatedir"
