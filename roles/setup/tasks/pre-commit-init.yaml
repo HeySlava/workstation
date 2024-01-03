@@ -1,5 +1,15 @@
 ---
-- name: Pre-commit init
-  ansible.builtin.command: pre-commit init-templatedir {{ home_directory }}/.git-template
-  args:
-    creates: "{{ home_directory }}/.init-templatedir"
+- name: Configure init-templatedir
+  vars:
+    target_dir: "{{ home_directory }}/.git-template"
+  block:
+    - name: Check {{ target_dir }}
+      ansible.builtin.stat:
+        path: "{{ target_dir }}"
+      register: template_dir
+
+    - name: Pre-commit init
+      ansible.builtin.command: pre-commit init-templatedir {{ target_dir }}
+      args:
+        creates: "{{ target_dir }}"
+      when: not template_dir.stat.exists
