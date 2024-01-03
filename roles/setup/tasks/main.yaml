@@ -15,6 +15,10 @@
   ansible.builtin.include_tasks:
     file: ./deadsnake.yaml
 
+- name: Install pip packages
+  ansible.builtin.include_tasks:
+    file: ./pip-packages.yaml
+
 - name: Clone dotfiles
   ansible.builtin.include_tasks:
     file: ./clone_dotfile.yaml
