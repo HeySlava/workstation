@@ -12,5 +12,7 @@ repos:
       - id: ansible-lint
         files: \.(yaml|yml)$
         args: [--fix]
+        # ansible is too big for GHA. It affects snap
+        # WARNING  Unable to resolve FQCN for module community.general.snap
         additional_dependencies:
-          - ansible
+          - ansible-core
