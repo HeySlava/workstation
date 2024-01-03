@@ -19,6 +19,7 @@
       - rofi
       - stow
       - tmux
+      - tree
       - xclip
       - zeal
     update-cache: true
