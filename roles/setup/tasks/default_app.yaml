@@ -6,6 +6,7 @@
       - fd-find
       - firefox
       - flameshot
+      - fzf
       - gcc
       - htop
       - i3blocks
