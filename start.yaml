@@ -3,5 +3,8 @@
   hosts: localhost
   gather_facts: true
 
+  vars:
+    home_directory: "{{ lookup('env', 'HOME') }}"
+
   roles:
     - setup

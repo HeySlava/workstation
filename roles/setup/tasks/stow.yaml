@@ -1,8 +1,4 @@
 ---
-- name: Get home directory
-  ansible.builtin.set_fact:
-    home_directory: "{{ lookup('env', 'HOME') }}"
-
 - name: Check if .bashrc exists
   ansible.builtin.stat:
     path: "{{ home_directory }}/.bashrc"
