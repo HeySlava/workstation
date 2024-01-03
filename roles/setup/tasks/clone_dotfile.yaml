@@ -1,7 +1,16 @@
 ---
 - name: Clone dotfiles
-  ansible.builtin.git:
-    repo: https://github.com/HeySlava/.dotfiles
-    dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
-    single_branch: true
-    version: main
+  block:
+    - name: Clone via ssh
+      ansible.builtin.git:
+        repo: git@github.com:HeySlava/.dotfiles.git
+        dest: "{{ dotfiles }}"
+        single_branch: true
+        version: main
+  rescue:
+    - name: Clone via https
+      ansible.builtin.git:
+        repo: https://github.com/HeySlava/.dotfiles
+        dest: "{{ dotfiles }}"
+        single_branch: true
+        version: main

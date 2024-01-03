@@ -5,6 +5,7 @@
 
   vars:
     home_directory: "{{ lookup('env', 'HOME') }}"
+    dotfiles: "{{ home_directory }}/.dotfiles"
 
   roles:
     - setup
