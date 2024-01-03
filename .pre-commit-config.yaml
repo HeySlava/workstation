@@ -12,3 +12,5 @@ repos:
       - id: ansible-lint
         files: \.(yaml|yml)$
         args: [--fix]
+        additional_dependencies:
+          - ansible
