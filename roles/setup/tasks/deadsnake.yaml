@@ -1,0 +1,14 @@
+---
+- name: Add deadsnake repo
+  ansible.builtin.apt_repository:
+    repo: ppa:deadsnakes/ppa
+    state: present
+  become: true
+
+- name: Install pythons
+  ansible.builtin.apt:
+    name:
+      - python3.11
+      - python3.12
+      - python3.13
+  become: true

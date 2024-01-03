@@ -11,6 +11,10 @@
   ansible.builtin.include_tasks:
     file: ./i3.yaml
 
+- name: Install deadsnakes
+  ansible.builtin.include_tasks:
+    file: ./deadsnake.yaml
+
 - name: Clone dotfiles
   ansible.builtin.include_tasks:
     file: ./clone_dotfile.yaml
