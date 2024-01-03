@@ -1,5 +1,5 @@
 ---
-- name: Install common packages
+- name: Install packages using apt
   ansible.builtin.include_tasks:
     file: ./default_app.yaml
 

@@ -1,5 +1,5 @@
 ---
-- name: Install common apps
+- name: Install apt apps
   ansible.builtin.apt:
     name:
       - curl
@@ -20,6 +20,7 @@
       - stow
       - tmux
       - xclip
+      - zeal
     update-cache: true
     cache_valid_time: 6400
   become: true
