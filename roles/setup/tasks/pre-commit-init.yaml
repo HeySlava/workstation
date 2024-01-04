@@ -12,4 +12,6 @@
       ansible.builtin.command: pre-commit init-templatedir {{ target_dir }}
       args:
         creates: "{{ target_dir }}"
+      environment:
+        PATH: "{{ ansible_env.PATH }}:{{ home_directory }}/.local/bin"
       when: not template_dir.stat.exists
