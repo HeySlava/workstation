@@ -4,3 +4,4 @@
     name:
       - tox
       - pre-commit
+      - yt-dlp
