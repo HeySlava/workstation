@@ -7,6 +7,10 @@
   ansible.builtin.include_tasks:
     file: ./nvim.yaml
 
+- name: Install node LTS
+  ansible.builtin.include_tasks:
+    file: ./nodejs.yaml
+
 - name: Install i3
   ansible.builtin.include_tasks:
     file: ./i3.yaml

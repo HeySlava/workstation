@@ -1,0 +1,16 @@
+---
+- name: Install nodejs
+  become: true
+  vars:
+    node_version: v20.10.0
+  block:
+    - name: Download latest stable tar archive
+      ansible.builtin.get_url:
+        url: https://nodejs.org/dist/{{ node_version }}/node-{{ node_version }}-linux-x64.tar.xz
+        dest: /opt/node-{{ node_version }}.tar.gz
+        mode: "0777"
+
+    - name: Extract nodejs
+      ansible.builtin.unarchive:
+        src: /opt/node-{{ node_version }}.tar.gz
+        dest: /opt/
