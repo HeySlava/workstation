@@ -2,13 +2,14 @@
 - name: Download keyring.deb
   ansible.builtin.get_url:
     url: https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2023.02.18_all.deb
-    dest: /tmp/keyring.deb
+    dest: /opt/keyring.deb
     checksum: sha256:a511ac5f10cd811f8a4ca44d665f2fa1add7a9f09bef238cdfad8461f5239cc4
     mode: "0600"
+  become: true
 
 - name: Install keyring.deb
   ansible.builtin.apt:
-    deb: /tmp/keyring.deb
+    deb: /opt/keyring.deb
   become: true
 
 - name: Add sur5r repository
