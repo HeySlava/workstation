@@ -2,6 +2,8 @@
 - name: Install packages from pip
   ansible.builtin.pip:
     name:
-      - tox
+      - docker==6.1.3
+      - docker-compose
       - pre-commit
+      - tox
       - yt-dlp
