@@ -1,0 +1,44 @@
+---
+- name: Install docker
+  become: true
+  block:
+    - name: Install setup packages for docker
+      apt:
+        - gnupg
+        - ca-certificates
+
+    - name: Setup GPG key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        keyring: /etc/apt/keyrings/docker.gpg
+
+    - name: Add Apt source
+      ansible.builtin.apt_repository:
+        repo: >
+          deb [arch={{ ansible_architecture }} signed-by=/etc/apt/keyrings/docker.gpg]
+          https://download.docker.com/linux/ubuntu
+          {{ ansible_distribution_release }} stable
+        filename: docker
+
+    - name: Install docker
+      apt:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+
+    - name: Install docker from pip utils
+      ansible.builtin.pip:
+        name:
+          - docker
+          - docker-compose
+
+    - name: Finish install
+      ansible.builtin.user:
+        name: slava
+        groups: docker
+        append: true
+
+    - name: Reboot
+      reboot: true

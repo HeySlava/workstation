@@ -42,3 +42,7 @@
 - name: Install packages from snap
   ansible.builtin.include_tasks:
     file: ./snap-packages.yaml
+
+- name: Install docker
+  ansible.builtin.include_tasks:
+    file: ./docker.yaml
