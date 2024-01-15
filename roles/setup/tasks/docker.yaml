@@ -3,9 +3,10 @@
   become: true
   block:
     - name: Install setup packages for docker
-      apt:
-        - gnupg
-        - ca-certificates
+      ansible.builtin.apt:
+        name:
+          - gnupg
+          - ca-certificates
 
     - name: Setup GPG key
       ansible.builtin.apt_key:
@@ -15,20 +16,23 @@
     - name: Add Apt source
       ansible.builtin.apt_repository:
         repo: >
-          deb [arch={{ ansible_architecture }} signed-by=/etc/apt/keyrings/docker.gpg]
+          deb [arch="{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}" signed-by=/etc/apt/keyrings/docker.gpg]
           https://download.docker.com/linux/ubuntu
           {{ ansible_distribution_release }} stable
         filename: docker
 
     - name: Install docker
-      apt:
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
-        - docker-buildx-plugin
-        - docker-compose-plugin
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        update_cache: true
+      notify: restart docker
 
-    - name: Install docker from pip utils
+    - name: Install docker utils from pip
       ansible.builtin.pip:
         name:
           - docker
@@ -39,6 +43,4 @@
         name: slava
         groups: docker
         append: true
-
-    - name: Reboot
-      reboot: true
+      notify: restart docker
