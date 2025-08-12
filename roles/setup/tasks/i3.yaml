@@ -14,7 +14,7 @@
 
 - name: Add sur5r repository
   ansible.builtin.apt_repository:
-    repo: deb http://debian.sur5r.net/i3/ {{ ansible_distribution_release }} universe
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/sur5r-keyring.gpg] http://debian.sur5r.net/i3/ {{ ansible_distribution_release }} universe"
     state: present
     filename: sur5r
   become: true
