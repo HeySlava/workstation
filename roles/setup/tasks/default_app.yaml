@@ -13,6 +13,7 @@
       - i3blocks
       - inotify-tools
       - kitty
+      - libpq-dev
       - maim
       - make
       - npm
