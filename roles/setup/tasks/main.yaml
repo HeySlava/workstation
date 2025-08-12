@@ -2,46 +2,101 @@
 - name: Install packages using apt
   ansible.builtin.include_tasks:
     file: ./default_app.yaml
+    apply:
+      tags:
+        - apt
+  tags:
+    - apt
 
 - name: Install latest neovim
   ansible.builtin.include_tasks:
     file: ./nvim.yaml
+    apply:
+      tags:
+        - neovim
+  tags:
+    - neovim
 
 - name: Install node LTS
   ansible.builtin.include_tasks:
     file: ./nodejs.yaml
+    apply:
+      tags:
+        - node
+  tags:
+    - node
 
 - name: Install i3
   ansible.builtin.include_tasks:
     file: ./i3.yaml
+    apply:
+      tags:
+        - i3
+  tags:
+    - i3
 
 - name: Install deadsnakes
   ansible.builtin.include_tasks:
     file: ./deadsnake.yaml
+    apply:
+      tags:
+        - deadsnakes
+  tags:
+    - deadsnakes
 
 - name: Install pip packages
   ansible.builtin.include_tasks:
     file: ./pip-packages.yaml
+    apply:
+      tags:
+        - pip_packages
+  tags:
+    - pip_packages
 
 - name: Init pre-commit hooks
   ansible.builtin.include_tasks:
     file: ./pre-commit-init.yaml
+    apply:
+      tags:
+        - pre_commit
+  tags:
+    - pre_commit
 
 - name: Clone dotfiles
   ansible.builtin.include_tasks:
     file: ./clone_dotfile.yaml
+    apply:
+      tags:
+        - dotfiles
+  tags:
+    - dotfiles
 
 - name: Create symlinks with stow
   ansible.builtin.include_tasks:
     file: ./stow.yaml
+    apply:
+      tags:
+        - stow
+  tags:
+    - stow
 
 - name: Generate ssh-keys
   ansible.builtin.include_tasks:
     file: ./ssh_keys.yaml
+    apply:
+      tags:
+        - ssh
+  tags:
+    - ssh
 
 - name: Install packages from snap
   ansible.builtin.include_tasks:
     file: ./snap-packages.yaml
+    apply:
+      tags:
+        - snap_packages
+  tags:
+    - snap_packages
 
 - name: Install docker
   ansible.builtin.include_tasks:
