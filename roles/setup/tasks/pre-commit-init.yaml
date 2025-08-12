@@ -6,7 +6,7 @@
     - name: Check {{ target_dir }}
       ansible.builtin.stat:
         path: "{{ target_dir }}"
-      register: template_dir
+      register: setup_template_dir
 
     - name: Pre-commit init
       ansible.builtin.command: pre-commit init-templatedir {{ target_dir }}
@@ -14,4 +14,4 @@
         creates: "{{ target_dir }}"
       environment:
         PATH: "{{ ansible_env.PATH }}:{{ home_directory }}/.local/bin"
-      when: not template_dir.stat.exists
+      when: not setup_template_dir.stat.exists

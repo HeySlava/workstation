@@ -2,14 +2,14 @@
 - name: Check if .bashrc exists
   ansible.builtin.stat:
     path: "{{ home_directory }}/.bashrc"
-  register: bashrc_stat
+  register: setup_bashrc_stat
 
 - name: Backup old .bashrc
   ansible.builtin.copy:
     src: "{{ home_directory }}/.bashrc"
     dest: "{{ home_directory }}/.bashrc.bak"
     mode: preserve
-  when: bashrc_stat.stat.exists
+  when: setup_bashrc_stat.stat.exists
   changed_when: false
 
 - name: Remove .bashrc
@@ -20,8 +20,8 @@
 
 - name: Run stow command
   ansible.builtin.command: stow {{ item }}
-  register: output
-  changed_when: output.rc != 0
+  register: setup_output
+  changed_when: setup_output.rc != 0
   args:
     chdir: "{{ home_directory }}/.dotfiles/"
   loop:
