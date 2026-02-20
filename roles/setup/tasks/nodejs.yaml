@@ -1,16 +1,23 @@
 ---
-- name: Install nodejs
-  become: true
+- name: Install nodejs via nvm
   vars:
-    node_version: v20.18.1
+    node_version: "20.18.1"
+    nvm_version: "0.40.0"
   block:
-    - name: Download latest stable tar archive
+    - name: Download nvm install script
       ansible.builtin.get_url:
-        url: https://nodejs.org/dist/{{ node_version }}/node-{{ node_version }}-linux-x64.tar.xz
-        dest: /opt/node-{{ node_version }}.tar.gz
-        mode: "0777"
+        url: https://raw.githubusercontent.com/nvm-sh/nvm/v{{ nvm_version }}/install.sh
+        dest: /tmp/nvm-install.sh
+        mode: "0755"
 
-    - name: Extract nodejs
-      ansible.builtin.unarchive:
-        src: /opt/node-{{ node_version }}.tar.gz
-        dest: /opt/
+    - name: Execute nvm install script
+      ansible.builtin.command: /tmp/nvm-install.sh
+      args:
+        creates: "{{ home_directory }}/.nvm/nvm.sh"
+
+    - name: Install node {{ node_version }}
+      ansible.builtin.shell: >
+        . {{ home_directory }}/.nvm/nvm.sh && nvm install {{ node_version }} && nvm alias default {{ node_version }}
+      args:
+        creates: "{{ home_directory }}/.nvm/versions/node/v{{ node_version }}"
+        executable: /bin/bash
