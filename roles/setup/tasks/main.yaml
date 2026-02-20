@@ -124,3 +124,12 @@
         - dbeaver
   tags:
     - dbeaver
+
+- name: Install Kubernetes tools (minikube/kubectl)
+  ansible.builtin.include_tasks:
+    file: ./kubernetes.yaml
+    apply:
+      tags:
+        - kubernetes
+  tags:
+    - kubernetes

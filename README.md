@@ -55,6 +55,7 @@ Here is the list of available tags you can use:
 - `docker` – Install Docker and Docker Compose
 - `dotfiles` – Clone personal dotfiles repository
 - `i3` – Install i3 window manager and related tools
+- `kubernetes` – Install kubectl and minikube
 - `neovim` – Install the latest Neovim
 - `node` – Install Node.js LTS via NodeSource
 - `pip_packages` – Install Python packages (pynvim, etc.)
