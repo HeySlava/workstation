@@ -1,6 +1,13 @@
 ---
-- name: Install packages from using snap
+- name: Install packages using snap (strict)
   community.general.snap:
     name:
       - telegram-desktop
+  become: true
+
+- name: Install packages using snap (classic)
+  community.general.snap:
+    name:
+      - code
+    classic: true
   become: true
