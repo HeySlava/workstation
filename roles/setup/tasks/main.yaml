@@ -106,3 +106,12 @@
         - docker
   tags:
     - docker
+
+- name: Install antigravity
+  ansible.builtin.include_tasks:
+    file: ./antigravity.yaml
+    apply:
+      tags:
+        - antigravity
+  tags:
+    - antigravity
