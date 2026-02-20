@@ -1,0 +1,23 @@
+---
+- name: Install Kubernetes tools
+  block:
+    - name: Ensure ~/.local/bin exists for kubectl
+      ansible.builtin.file:
+        path: "{{ home_directory }}/.local/bin"
+        state: directory
+        mode: "0755"
+
+    - name: Download kubectl binary
+      ansible.builtin.get_url:
+        url: https://dl.k8s.io/release/v1.34.0/bin/linux/amd64/kubectl
+        dest: "{{ home_directory }}/.local/bin/kubectl"
+        mode: "0755"
+        force: false
+
+    - name: Download minikube binary
+      become: true
+      ansible.builtin.get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /usr/local/bin/minikube
+        mode: "0755"
+        force: false

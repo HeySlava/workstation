@@ -1,0 +1,27 @@
+---
+- name: Install DBeaver
+  become: true
+  block:
+    - name: Ensure keyrings directory exists
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
+
+    - name: Download DBeaver GPG key
+      ansible.builtin.get_url:
+        url: https://dbeaver.io/debs/dbeaver.gpg.key
+        dest: /etc/apt/keyrings/dbeaver.asc
+        mode: "0644"
+        force: true
+
+    - name: Add DBeaver Apt source
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/etc/apt/keyrings/dbeaver.asc] https://dbeaver.io/debs/dbeaver-ce /"
+        filename: dbeaver
+        state: present
+
+    - name: Install DBeaver Community Edition
+      ansible.builtin.apt:
+        name: dbeaver-ce
+        update_cache: true

@@ -106,3 +106,30 @@
         - docker
   tags:
     - docker
+
+- name: Install antigravity
+  ansible.builtin.include_tasks:
+    file: ./antigravity.yaml
+    apply:
+      tags:
+        - antigravity
+  tags:
+    - antigravity
+
+- name: Install dbeaver
+  ansible.builtin.include_tasks:
+    file: ./dbeaver.yaml
+    apply:
+      tags:
+        - dbeaver
+  tags:
+    - dbeaver
+
+- name: Install Kubernetes tools (minikube/kubectl)
+  ansible.builtin.include_tasks:
+    file: ./kubernetes.yaml
+    apply:
+      tags:
+        - kubernetes
+  tags:
+    - kubernetes
