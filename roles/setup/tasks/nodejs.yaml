@@ -2,7 +2,7 @@
 - name: Install nodejs
   become: true
   vars:
-    node_version: v20.10.0
+    node_version: v20.18.1
   block:
     - name: Download latest stable tar archive
       ansible.builtin.get_url:
