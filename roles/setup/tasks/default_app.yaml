@@ -5,7 +5,6 @@
       - curl
       - fd-find
       - ffmpeg
-      - firefox
       - flameshot
       - fzf
       - gcc

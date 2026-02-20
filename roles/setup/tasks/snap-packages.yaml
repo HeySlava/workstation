@@ -3,6 +3,7 @@
   community.general.snap:
     name:
       - telegram-desktop
+      - firefox
   become: true
 
 - name: Install packages using snap (classic)
