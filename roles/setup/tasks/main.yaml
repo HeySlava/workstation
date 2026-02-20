@@ -115,3 +115,12 @@
         - antigravity
   tags:
     - antigravity
+
+- name: Install dbeaver
+  ansible.builtin.include_tasks:
+    file: ./dbeaver.yaml
+    apply:
+      tags:
+        - dbeaver
+  tags:
+    - dbeaver

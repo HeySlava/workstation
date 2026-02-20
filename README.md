@@ -50,6 +50,7 @@ Here is the list of available tags you can use:
 
 - `antigravity` – Install Antigravity IDE/agent
 - `apt` – Install basic default applications (curl, git, htop, etc.)
+- `dbeaver` – Install DBeaver Community Edition
 - `deadsnakes` – Install the deadsnakes PPA for Python versions
 - `docker` – Install Docker and Docker Compose
 - `dotfiles` – Clone personal dotfiles repository
