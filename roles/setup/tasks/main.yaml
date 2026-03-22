@@ -142,3 +142,12 @@
         - kubernetes
   tags:
     - kubernetes
+
+- name: Install OBS Studio
+  ansible.builtin.include_tasks:
+    file: ./obs.yaml
+    apply:
+      tags:
+        - obs
+  tags:
+    - obs
