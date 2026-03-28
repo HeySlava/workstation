@@ -1,0 +1,30 @@
+---
+- name: Install OBS Studio
+  become: true
+  block:
+    - name: Ensure keyrings directory exists
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
+
+    - name: Download OBS Studio PPA GPG key
+      ansible.builtin.get_url:
+        url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xBC7345F522079769F5BBE987EFC71127F425E228"
+        dest: /etc/apt/keyrings/obsproject-obs-studio.asc
+        mode: "0644"
+        force: true
+
+    - name: Add OBS Studio APT source
+      ansible.builtin.apt_repository:
+        repo: >
+          deb [signed-by=/etc/apt/keyrings/obsproject-obs-studio.asc]
+          https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu
+          {{ ansible_facts['distribution_release'] }} main
+        filename: obs-studio
+        state: present
+
+    - name: Install OBS Studio
+      ansible.builtin.apt:
+        name: obs-studio
+        update_cache: true

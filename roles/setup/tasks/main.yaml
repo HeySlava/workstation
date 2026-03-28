@@ -53,6 +53,15 @@
   tags:
     - pip_packages
 
+- name: Install uv
+  ansible.builtin.include_tasks:
+    file: ./uv.yaml
+    apply:
+      tags:
+        - uv
+  tags:
+    - uv
+
 - name: Init pre-commit hooks
   ansible.builtin.include_tasks:
     file: ./pre-commit-init.yaml
@@ -133,3 +142,12 @@
         - kubernetes
   tags:
     - kubernetes
+
+- name: Install OBS Studio
+  ansible.builtin.include_tasks:
+    file: ./obs.yaml
+    apply:
+      tags:
+        - obs
+  tags:
+    - obs

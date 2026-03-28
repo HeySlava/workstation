@@ -11,9 +11,13 @@ If you are setting up a completely new machine, you can run the playbook directl
 sudo apt update && sudo apt upgrade -y
 # sudo shutdown -r now
 
-# Install dependencies
-sudo apt install -y git python3-pip
-pip3 install ansible
+# Install dependencies and uv
+sudo apt install -y git curl
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source $HOME/.local/bin/env
+
+# Install Ansible via uv tool
+uv tool install ansible-core
 
 # Run the playbook directly from the repository
 ~/.local/bin/ansible-pull -U https://github.com/HeySlava/workstation local.yml -K
@@ -58,11 +62,13 @@ Here is the list of available tags you can use:
 - `kubernetes` – Install kubectl and minikube
 - `neovim` – Install the latest Neovim
 - `node` – Install Node.js LTS via NodeSource
-- `pip_packages` – Install Python packages (pynvim, etc.)
+- `obs` – Install OBS Studio
+- `pip_packages` – Install Python CLI tools via uv (tox, ansible, pre-commit, yt-dlp, etc.)
 - `pre_commit` – Install and configure pre-commit hooks
 - `snap_packages` – Install applications via Snap
 - `ssh` – Generate SSH keys
 - `stow` – Run GNU Stow to link dotfiles
+- `uv` – Install uv Python package manager
 
 ### Skipping Tags
 
