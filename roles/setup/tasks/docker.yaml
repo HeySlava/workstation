@@ -38,7 +38,6 @@
       ansible.builtin.pip:
         name:
           - docker
-          - docker-compose
 
     - name: Finish install
       ansible.builtin.user:
