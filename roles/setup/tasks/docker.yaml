@@ -34,10 +34,10 @@
         update_cache: true
       notify: Restart docker
 
-    - name: Install docker utils from pip
-      ansible.builtin.pip:
+    - name: Install docker utils from apt
+      ansible.builtin.apt:
         name:
-          - docker
+          - python3-docker
 
     - name: Finish install
       ansible.builtin.user:
