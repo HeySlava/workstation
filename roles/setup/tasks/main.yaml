@@ -44,15 +44,6 @@
   tags:
     - deadsnakes
 
-- name: Install pip packages
-  ansible.builtin.include_tasks:
-    file: ./pip-packages.yaml
-    apply:
-      tags:
-        - pip_packages
-  tags:
-    - pip_packages
-
 - name: Install uv
   ansible.builtin.include_tasks:
     file: ./uv.yaml
@@ -61,6 +52,15 @@
         - uv
   tags:
     - uv
+
+- name: Install pip packages
+  ansible.builtin.include_tasks:
+    file: ./pip-packages.yaml
+    apply:
+      tags:
+        - pip_packages
+  tags:
+    - pip_packages
 
 - name: Init pre-commit hooks
   ansible.builtin.include_tasks:
@@ -115,6 +115,15 @@
         - docker
   tags:
     - docker
+
+- name: Install VirtualBox and Vagrant
+  ansible.builtin.include_tasks:
+    file: ./virtualbox.yaml
+    apply:
+      tags:
+        - virtualbox
+  tags:
+    - virtualbox
 
 - name: Install antigravity
   ansible.builtin.include_tasks:

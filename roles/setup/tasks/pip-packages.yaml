@@ -1,14 +1,14 @@
 ---
 - name: Install Python CLI tools via uv
-  ansible.builtin.command: "{{ item }}"
+  ansible.builtin.command: "{{ home_directory }}/.local/bin/uv {{ item }}"
   loop:
-    - uv tool install tox --with tox-uv
-    - uv tool install --with-executables-from ansible-core,ansible-lint ansible
-    - uv tool install pre-commit --with pre-commit-uv
-    - uv tool install pytest
-    - uv tool install yt-dlp
+    - tool install tox --with tox-uv
+    - tool install --with-executables-from ansible-core,ansible-lint ansible
+    - tool install pre-commit --with pre-commit-uv
+    - tool install pytest
+    - tool install yt-dlp
   register: setup_uv_tool_install
-  changed_when: "'Installed' in setup_uv_tool_install.stdout or 'Updated' in setup_uv_tool_install.stdout"
+  changed_when: "'is already installed' not in setup_uv_tool_install.stdout"
 
 - name: Setup Neovim Python virtual environment
   block:
@@ -19,11 +19,11 @@
         mode: "0755"
 
     - name: Create neovim virtualenv
-      ansible.builtin.command: uv venv {{ home_directory }}/.virtualenvs/neovim
+      ansible.builtin.command: "{{ home_directory }}/.local/bin/uv venv {{ home_directory }}/.virtualenvs/neovim"
       args:
         creates: "{{ home_directory }}/.virtualenvs/neovim/bin/python"
 
     - name: Install pynvim in neovim virtualenv
-      ansible.builtin.command: uv pip install -p {{ home_directory }}/.virtualenvs/neovim pynvim
+      ansible.builtin.command: "{{ home_directory }}/.local/bin/uv pip install -p {{ home_directory }}/.virtualenvs/neovim pynvim"
       register: setup_pynvim_install
       changed_when: "'Installed' in setup_pynvim_install.stdout"

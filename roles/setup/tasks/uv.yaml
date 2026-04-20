@@ -2,10 +2,10 @@
 - name: Download uv install script
   ansible.builtin.get_url:
     url: https://astral.sh/uv/install.sh
-    dest: /tmp/uv-install.sh
+    dest: "/tmp/uv-install-{{ ansible_user_id }}.sh"
     mode: "0755"
 
 - name: Execute uv install script
-  ansible.builtin.command: /tmp/uv-install.sh
+  ansible.builtin.command: "/tmp/uv-install-{{ ansible_user_id }}.sh"
   args:
     creates: "{{ home_directory }}/.local/bin/uv"

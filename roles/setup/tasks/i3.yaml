@@ -1,9 +1,9 @@
 ---
 - name: Download keyring.deb
   ansible.builtin.get_url:
-    url: https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2025.03.09_all.deb
+    url: https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2025.12.14_all.deb
     dest: /opt/keyring.deb
-    checksum: sha256:2c2601e6053d5c68c2c60bcd088fa9797acec5f285151d46de9c830aaba6173c
+    checksum: sha256:2c816fbd12ea4d84811818aed0ce3a5da589be1afa30833eb32abc1e4fe6349e
     mode: "0600"
   become: true
 
@@ -23,4 +23,5 @@
   ansible.builtin.apt:
     name: i3
     state: present
+    update_cache: true
   become: true
