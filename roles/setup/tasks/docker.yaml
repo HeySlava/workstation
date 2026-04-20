@@ -31,18 +31,13 @@
           - containerd.io
           - docker-buildx-plugin
           - docker-compose-plugin
+          - python3-docker
         update_cache: true
       notify: Restart docker
 
-    - name: Install docker utils from pip
-      ansible.builtin.pip:
-        name:
-          - docker
-          - docker-compose
-
     - name: Finish install
       ansible.builtin.user:
-        name: slava
+        name: "{{ ansible_user_id }}"
         groups: docker
         append: true
       notify: Restart docker

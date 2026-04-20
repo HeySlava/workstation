@@ -20,7 +20,7 @@
       - python3-pip
       - ripgrep
       - rofi
-      - sqlite
+      - sqlite3
       - stow
       - tmux
       - tree
@@ -28,6 +28,6 @@
       - xclip
       - zathura
       - zeal
-    update-cache: true
+    update_cache: true
     cache_valid_time: 6400
   become: true

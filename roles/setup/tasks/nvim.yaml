@@ -4,17 +4,18 @@
   block:
     - name: Download latest stable tar archive
       ansible.builtin.get_url:
-        url: https://github.com/neovim/neovim/releases/download/v0.11.0/nvim-linux64.tar.gz
-        dest: /opt/nvim-linux64.tar.gz
+        url: https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
+        dest: /opt/nvim-linux-x86_64.tar.gz
         mode: "0777"
 
     - name: Extract neovim
       ansible.builtin.unarchive:
-        src: /opt/nvim-linux64.tar.gz
+        src: /opt/nvim-linux-x86_64.tar.gz
         dest: /opt/
+        remote_src: true
 
     - name: Create symbolic link for nvim
       ansible.builtin.file:
-        src: /opt/nvim-linux64/bin/nvim
+        src: /opt/nvim-linux-x86_64/bin/nvim
         dest: /usr/local/bin/nvim
         state: link

@@ -1,0 +1,48 @@
+---
+- name: Install VirtualBox and Vagrant
+  become: true
+  block:
+    - name: Install VirtualBox
+      ansible.builtin.apt:
+        name: virtualbox
+        update_cache: true
+
+    - name: Install setup packages for HashiCorp
+      ansible.builtin.apt:
+        name:
+          - wget
+          - gpg
+          - coreutils
+
+    - name: Create keyrings directory
+      ansible.builtin.file:
+        path: /usr/share/keyrings
+        state: directory
+        mode: "0755"
+
+    - name: Setup HashiCorp GPG key
+      ansible.builtin.get_url:
+        url: https://apt.releases.hashicorp.com/gpg
+        dest: /tmp/hashicorp.gpg
+        mode: "0644"
+
+    - name: Dearmor HashiCorp GPG key
+      ansible.builtin.command:
+        cmd: gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg /tmp/hashicorp.gpg
+        creates: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+    - name: Add HashiCorp Apt source
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+        filename: hashicorp
+
+    - name: Install Vagrant
+      ansible.builtin.apt:
+        name: vagrant
+        update_cache: true
+
+    - name: Add user to vboxusers group
+      ansible.builtin.user:
+        name: "{{ ansible_user_id }}"
+        groups: vboxusers
+        append: true
