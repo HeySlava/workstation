@@ -7,11 +7,11 @@
     - name: Download nvm install script
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/nvm-sh/nvm/v{{ nvm_version }}/install.sh
-        dest: /tmp/nvm-install.sh
+        dest: "/tmp/nvm-install-{{ ansible_user_id }}.sh"
         mode: "0755"
 
     - name: Execute nvm install script
-      ansible.builtin.command: /tmp/nvm-install.sh
+      ansible.builtin.command: "/tmp/nvm-install-{{ ansible_user_id }}.sh"
       args:
         creates: "{{ home_directory }}/.nvm/nvm.sh"
 

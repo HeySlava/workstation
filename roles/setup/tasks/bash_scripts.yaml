@@ -1,0 +1,6 @@
+---
+- name: Install custom scripts in editable mode using uv
+  ansible.builtin.command:
+    cmd: "{{ home_directory }}/.local/bin/uv tool install --editable {{ home_directory }}/code/bash_scripts --force"
+  register: setup_uv_install_output
+  changed_when: "'Installed' in setup_uv_install_output.stderr or 'Updated' in setup_uv_install_output.stderr"
