@@ -1,7 +1,7 @@
 ---
 - name: Install nodejs via nvm
   vars:
-    node_version: "20.18.1"
+    node_version: "22.22.3"
     nvm_version: "0.40.0"
   block:
     - name: Download nvm install script
